@@ -14,5 +14,6 @@ export default class Game {
     }
     render(context: CanvasRenderingContext2D) {
         this.player.draw(context);
+        this.player.update();
     }
 }
