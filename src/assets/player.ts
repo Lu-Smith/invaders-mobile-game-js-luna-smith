@@ -14,4 +14,7 @@ export default class Player {
         this.x = 200;
         this.y = 200;
     }
+    draw(context: CanvasRenderingContext2D) {
+        context.fillRect(this.x, this.y, this.width, this.height);
+    }
 }
