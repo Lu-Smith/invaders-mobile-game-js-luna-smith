@@ -14,12 +14,13 @@ export default class Player {
         this.height = 60;
         this.x = this.game.width * 0.5 - this.width * 0.5;
         this.y = this.game.height - this.height;
-        this.speed = 0;
+        this.speed = 5;
     }
     draw(context: CanvasRenderingContext2D) {
         context.fillRect(this.x, this.y, this.width, this.height);
     }
     update() {
-        this.x += this.speed;
+        if (this.game.keys.indexOf('ArrowLeft') > -1) this.x -= this.speed; 
+        if (this.game.keys.indexOf('ArrowRight') > -1) this.x += this.speed; 
     }
 }
