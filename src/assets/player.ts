@@ -20,7 +20,12 @@ export default class Player {
         context.fillRect(this.x, this.y, this.width, this.height);
     }
     update() {
+        //horizontal movement
         if (this.game.keys.indexOf('ArrowLeft') > -1) this.x -= this.speed; 
         if (this.game.keys.indexOf('ArrowRight') > -1) this.x += this.speed; 
+
+        //horizontal boundries
+        if (this.x < 0) this.x = 0;
+        else if (this.x > this.game.width - this.width) this.x = this.game.width - this.width;
     }
 }
