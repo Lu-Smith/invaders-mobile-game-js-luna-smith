@@ -1,14 +1,18 @@
+import Player from "./player";
+
 export default class Game {
     canvas: HTMLCanvasElement;
     width: number;
     height: number;
+    player: Player;
 
     constructor(canvas: HTMLCanvasElement) {
         this.canvas = canvas;
         this.width = this.canvas.width;
         this.height = this.canvas.height;
+        this.player = new Player(this);
     }
-    render() {
-        console.log(this.width, this.height);
+    render(context: CanvasRenderingContext2D) {
+        this.player.draw(context);
     }
 }
