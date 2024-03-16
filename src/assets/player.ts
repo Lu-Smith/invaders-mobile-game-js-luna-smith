@@ -14,7 +14,7 @@ export default class Player {
         this.height = 60;
         this.x = this.game.width * 0.5 - this.width * 0.5;
         this.y = this.game.height - this.height;
-        this.speed = 5;
+        this.speed = 0;
     }
     draw(context: CanvasRenderingContext2D) {
         context.fillRect(this.x, this.y, this.width, this.height);
