@@ -5,14 +5,22 @@ window.addEventListener('load', function() {
   const canvas = document.getElementById('canvas1') as HTMLCanvasElement;
   if (canvas) {
     const ctx = canvas.getContext('2d');
-    canvas.width = 300;
-    canvas.height = 400;
+    canvas.width = 600 * 0.64;
+    canvas.height = 800 * 0.64;
 
     const game = new Game(canvas);
-    if (ctx) {
+  
+    function animate() {
+      ctx?.clearRect(0, 0, canvas.width, canvas.height);
+      if (ctx) {
       game.render(ctx);
-    }
+      requestAnimationFrame(animate);
+      }
+    };
+
+    animate();
   }
+
 });
 
 
