@@ -9,7 +9,9 @@ window.addEventListener('load', function() {
     canvas.height = 400;
 
     const game = new Game(canvas);
-    game.render();
+    if (ctx) {
+      game.render(ctx);
+    }
   }
 });
 
