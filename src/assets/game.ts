@@ -1,4 +1,5 @@
 import Player from "./player";
+import Projectile from "./projectile";
 
 export default class Game {
     canvas: HTMLCanvasElement;
@@ -6,7 +7,7 @@ export default class Game {
     height: number;
     player: Player;
     keys: string[];
-    projectilesPool: number[];
+    projectilesPool: Projectile [];
     numbersOfProjectiles: number;
 
     constructor(canvas: HTMLCanvasElement) {
@@ -31,5 +32,11 @@ export default class Game {
     render(context: CanvasRenderingContext2D) {
         this.player.draw(context);
         this.player.update();
+    }
+    //create projectiles object pool
+    createProjectiles() {
+        for (let i=0; i < this.numbersOfProjectiles; i++) {
+            this.projectilesPool.push(new Projectile());
+        }
     }
 }
