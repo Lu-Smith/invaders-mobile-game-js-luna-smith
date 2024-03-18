@@ -24,4 +24,10 @@ export default class Projectile {
             this.y -= this.speed;
         }
     }
+    start() {
+        this.free = false;
+    }
+    reset() {
+        this.free = true;
+    }
 }
