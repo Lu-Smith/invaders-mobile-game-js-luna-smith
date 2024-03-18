@@ -14,14 +14,14 @@ export default class Projectile {
         this.speed = 20;
         this.free = true;
     }
-    draw() {
+    draw(context: CanvasRenderingContext2D) {
         if(!this.free) {
-
+            context.fillRect(this.x, this.y, this.width, this.height);
         }
     }
     update() {
         if(!this.free) {
-            
+            this.y -= this.speed;
         }
     }
 }
