@@ -6,6 +6,8 @@ export default class Game {
     height: number;
     player: Player;
     keys: string[];
+    projectilesPool: number[];
+    numbersOfProjectiles: number;
 
     constructor(canvas: HTMLCanvasElement) {
         this.canvas = canvas;
@@ -13,6 +15,8 @@ export default class Game {
         this.height = this.canvas.height;
         this.keys = [];
         this.player = new Player(this);
+        this.projectilesPool = [];
+        this.numbersOfProjectiles = 10;
 
         //event listeners
         window.addEventListener('keydown', e => {
