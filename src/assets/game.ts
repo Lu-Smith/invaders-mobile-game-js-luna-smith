@@ -18,6 +18,8 @@ export default class Game {
         this.player = new Player(this);
         this.projectilesPool = [];
         this.numbersOfProjectiles = 10;
+        this.createProjectiles();
+        console.log(this.projectilesPool);
 
         //event listeners
         window.addEventListener('keydown', e => {
@@ -35,8 +37,15 @@ export default class Game {
     }
     //create projectiles object pool
     createProjectiles() {
-        for (let i=0; i < this.numbersOfProjectiles; i++) {
+        for (let i = 0; i < this.numbersOfProjectiles; i++) {
             this.projectilesPool.push(new Projectile());
         }
     }
+    //get free projectile objext from the pool
+    getProjectile() {
+        for (let i = 0; i < this.projectilesPool.length; i++) {
+            if(this.projectilesPool[i].free) return this.projectilesPool[i];
+        }
+    }
+
 }
