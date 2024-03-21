@@ -5,19 +5,24 @@ export default class Enemy {
     height: number;
     x: number;
     y: number;
+    positionX: number;
+    positionY: number;
 
     game: Game;
-    constructor(game: Game) {
+    constructor(game: Game, positionX: number, positionY: number) {
         this.game = game;
-        this.width = 0;
-        this.height = 0;
-        this.x = 10;
-        this.y = 10;
+        this.width = this.game.enemySize;
+        this.height = this.game.enemySize;
+        this.x = 0;
+        this.y = 0;
+        this.positionX = positionX;
+        this.positionY = positionY;
     }
     draw(context: CanvasRenderingContext2D) {
         context.strokeRect(this.x, this.y, this.width, this.height);
     }
-    update() {
-        
+    update(x:number, y: number) {
+        this.x = x + this.positionX;
+        this.y = y + this.positionY;
     }
 }
