@@ -1,5 +1,6 @@
 import Player from "./player";
 import Projectile from "./projectile";
+import Wave from "./wave";
 
 export default class Game {
     canvas: HTMLCanvasElement;
@@ -12,6 +13,7 @@ export default class Game {
     columns: number;
     rows: number;
     enemySize: number;
+    waves: Wave[];
 
     constructor(canvas: HTMLCanvasElement) {
         this.canvas = canvas;
@@ -23,9 +25,11 @@ export default class Game {
         this.numbersOfProjectiles = 10;
         this.createProjectiles();
         //enemy
-        this.columns = 3;
-        this.rows = 3;
+        this.columns = 5;
+        this.rows = 8;
         this.enemySize = 60;
+        this.waves = [];
+        this.waves.push(new Wave(this));
 
         //event listeners
         window.addEventListener('keydown', e => {
@@ -44,6 +48,9 @@ export default class Game {
         this.projectilesPool.forEach(projectile => {
             projectile.update();
             projectile.draw(context);
+        });
+        this.waves.forEach(wave => {
+            wave.render(context);
         })
     }
     //create projectiles object pool
