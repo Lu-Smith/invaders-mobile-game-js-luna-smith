@@ -28,4 +28,8 @@ export default class Player {
         if (this.x < 0) this.x = 0;
         else if (this.x > this.game.width - this.width) this.x = this.game.width - this.width;
     }
+    shoot() {
+        const projectile = this.game.getProjectile();
+        if (projectile) projectile.start(this.x, this.y);
+    }
 }
