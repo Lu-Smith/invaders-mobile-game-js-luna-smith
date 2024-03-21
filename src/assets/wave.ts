@@ -1,3 +1,4 @@
+import Enemy from './enemy';
 import Game from './game';
 
 export default class Wave {
@@ -7,6 +8,7 @@ export default class Wave {
     y: number;
     speedX: number;
     speedY: number;
+    enemies: Enemy[];
 
     game: Game;
     constructor(game: Game) {
@@ -17,6 +19,7 @@ export default class Wave {
         this.y = 0;
         this.speedX = 3;
         this.speedY = 0;
+        this.enemies = [];
     }
     render(context: CanvasRenderingContext2D) {
         this.speedY = 0;
@@ -27,5 +30,14 @@ export default class Wave {
         }
         this.x += this.speedX;
         this.y += this.speedY;
+    }
+    create() {
+        for (let y = 0; this.game.rows; y++ ) {
+            for(let x = 0; x < this.game.enemySize; x++) {
+                let enemyX = x * this.game.enemySize;
+                let enemyY = y * this.game.enemySize;
+                this.enemies.push(new Enemy(this.game, enemyX, enemyY));
+            }
+        }
     }
 }
