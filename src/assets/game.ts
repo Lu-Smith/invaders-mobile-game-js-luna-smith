@@ -24,6 +24,7 @@ export default class Game {
         //event listeners
         window.addEventListener('keydown', e => {
             if (this.keys.indexOf(e.key) === -1) this.keys.push(e.key);
+            if (e.key === '1') this.player.shoot();
         })
 
         window.addEventListener('keyup', e => {
@@ -34,6 +35,10 @@ export default class Game {
     render(context: CanvasRenderingContext2D) {
         this.player.draw(context);
         this.player.update();
+        this.projectilesPool.forEach(projectile => {
+            projectile.update();
+            projectile.draw(context);
+        })
     }
     //create projectiles object pool
     createProjectiles() {
