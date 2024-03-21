@@ -24,7 +24,9 @@ export default class Projectile {
             this.y -= this.speed;
         }
     }
-    start() {
+    start(x: number, y: number) {
+        this.x = x;
+        this.y = y;
         this.free = false;
     }
     reset() {
