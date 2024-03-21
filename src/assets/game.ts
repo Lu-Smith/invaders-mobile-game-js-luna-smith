@@ -27,7 +27,7 @@ export default class Game {
         //enemy
         this.columns = 3;
         this.rows = 3;
-        this.enemySize = 60;
+        this.enemySize = 40;
         this.waves = [];
         this.waves.push(new Wave(this));
 
