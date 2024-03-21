@@ -14,4 +14,7 @@ export default class Wave {
         this.x = 10;
         this.y = 10;
     }
+    render(context: CanvasRenderingContext2D) {
+        context.strokeRect(this.x, this.y, this.width, this.height);
+    }
 }
