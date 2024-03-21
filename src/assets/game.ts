@@ -25,8 +25,8 @@ export default class Game {
         this.numbersOfProjectiles = 10;
         this.createProjectiles();
         //enemy
-        this.columns = 5;
-        this.rows = 8;
+        this.columns = 3;
+        this.rows = 3;
         this.enemySize = 60;
         this.waves = [];
         this.waves.push(new Wave(this));
