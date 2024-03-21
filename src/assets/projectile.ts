@@ -22,10 +22,11 @@ export default class Projectile {
     update() {
         if(!this.free) {
             this.y -= this.speed;
+            if(this.y < - this.height) this.reset();
         }
     }
     start(x: number, y: number) {
-        this.x = x;
+        this.x = x - this.width * 0.5;
         this.y = y;
         this.free = false;
     }
