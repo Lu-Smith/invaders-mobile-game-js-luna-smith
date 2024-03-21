@@ -9,6 +9,9 @@ export default class Game {
     keys: string[];
     projectilesPool: Projectile [];
     numbersOfProjectiles: number;
+    columns: number;
+    rows: number;
+    enemySize: number;
 
     constructor(canvas: HTMLCanvasElement) {
         this.canvas = canvas;
@@ -19,7 +22,10 @@ export default class Game {
         this.projectilesPool = [];
         this.numbersOfProjectiles = 10;
         this.createProjectiles();
-        console.log(this.projectilesPool);
+        //enemy
+        this.columns = 3;
+        this.rows = 3;
+        this.enemySize = 60;
 
         //event listeners
         window.addEventListener('keydown', e => {
