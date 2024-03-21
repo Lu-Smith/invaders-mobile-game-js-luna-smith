@@ -7,6 +7,9 @@ window.addEventListener('load', function() {
     const ctx = canvas.getContext('2d');
     canvas.width = 600 * 0.8;
     canvas.height = 800 * 0.8;
+    if (ctx) {
+      ctx.fillStyle = 'white';
+    }
 
     const game = new Game(canvas);
   
