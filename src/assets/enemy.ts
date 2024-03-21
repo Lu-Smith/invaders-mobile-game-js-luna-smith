@@ -14,4 +14,10 @@ export default class Enemy {
         this.x = 10;
         this.y = 10;
     }
+    draw(context: CanvasRenderingContext2D) {
+        context.strokeRect(this.x, this.y, this.width, this.height);
+    }
+    update() {
+        
+    }
 }
