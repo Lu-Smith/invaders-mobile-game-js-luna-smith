@@ -9,6 +9,8 @@ window.addEventListener('load', function() {
     canvas.height = 800 * 0.8;
     if (ctx) {
       ctx.fillStyle = 'white';
+      ctx.strokeStyle = 'white';
+      ctx.lineWidth = 3;
     }
 
     const game = new Game(canvas);
