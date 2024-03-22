@@ -35,6 +35,7 @@ export default class Wave {
             enemy.update(this.x, this.y);
             enemy.draw(context);
         })
+        this.enemies = this.enemies.filter(object => !object.markedForDeletion);
     }
     create() {
         for (let y = 0; y < this.game.rows; y++ ) {
