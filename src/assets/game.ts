@@ -1,3 +1,4 @@
+import Enemy from "./enemy";
 import Player from "./player";
 import Projectile from "./projectile";
 import Wave from "./wave";
@@ -64,6 +65,15 @@ export default class Game {
         for (let i = 0; i < this.projectilesPool.length; i++) {
             if(this.projectilesPool[i].free) return this.projectilesPool[i];
         }
+    }
+    //collision detection between 2 rectangles
+    checkCollision(a: Enemy, b: Projectile) {
+        return (
+            a.x < b.x + b.width &&
+            a.x + a.width > b.x &&
+            a.y < b.y + b.height &&
+            a.y + a.height > b.y
+        ) 
     }
 
 }
