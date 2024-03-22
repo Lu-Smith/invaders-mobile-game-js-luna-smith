@@ -15,6 +15,7 @@ export default class Game {
     rows: number;
     enemySize: number;
     waves: Wave[];
+    score: number;
 
     constructor(canvas: HTMLCanvasElement) {
         this.canvas = canvas;
@@ -26,11 +27,12 @@ export default class Game {
         this.numbersOfProjectiles = 10;
         this.createProjectiles();
         //enemy
-        this.columns = 3;
-        this.rows = 3;
-        this.enemySize = 40;
+        this.columns = 5;
+        this.rows = 6;
+        this.enemySize = 30;
         this.waves = [];
         this.waves.push(new Wave(this));
+        this.score = 0;
 
         //event listeners
         window.addEventListener('keydown', e => {
@@ -44,6 +46,7 @@ export default class Game {
         })
     }
     render(context: CanvasRenderingContext2D) {
+        this.drawStatusText(context);
         this.player.draw(context);
         this.player.update();
         this.projectilesPool.forEach(projectile => {
@@ -52,7 +55,7 @@ export default class Game {
         });
         this.waves.forEach(wave => {
             wave.render(context);
-        })
+        });
     }
     //create projectiles object pool
     createProjectiles() {
@@ -74,6 +77,9 @@ export default class Game {
             a.y < b.y + b.height &&
             a.y + a.height > b.y
         ) 
+    }
+    drawStatusText(context: CanvasRenderingContext2D) {
+        context.fillText('Score: ' + this.score, 20, 40);
     }
 
 }
