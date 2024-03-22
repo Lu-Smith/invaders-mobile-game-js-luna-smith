@@ -16,6 +16,7 @@ export default class Game {
     enemySize: number;
     waves: Wave[];
     score: number;
+    gameOver: boolean;
 
     constructor(canvas: HTMLCanvasElement) {
         this.canvas = canvas;
@@ -32,7 +33,9 @@ export default class Game {
         this.enemySize = 30;
         this.waves = [];
         this.waves.push(new Wave(this));
+        //score
         this.score = 0;
+        this.gameOver = false;
 
         //event listeners
         window.addEventListener('keydown', e => {
@@ -79,7 +82,14 @@ export default class Game {
         ) 
     }
     drawStatusText(context: CanvasRenderingContext2D) {
+        context.save();
         context.fillText('Score: ' + this.score, 20, 40);
+        if (this.gameOver) {
+            context.textAlign = 'center';
+            context.font = '100px Impact';
+            context.fillText('Game Over!', this.width * 0.5, this.height * 0.5);
+        }
+        context.restore();
     }
 
 }
