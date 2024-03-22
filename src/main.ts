@@ -11,6 +11,7 @@ window.addEventListener('load', function() {
       ctx.fillStyle = 'white';
       ctx.strokeStyle = 'white';
       ctx.lineWidth = 3;
+      ctx.font = '20px Impact';
     }
 
     const game = new Game(canvas);
