@@ -60,6 +60,11 @@ export default class Game {
         });
         this.waves.forEach(wave => {
             wave.render(context);
+            if (wave.enemies.length < 1 && !wave.nextWaveTrigger && !this.gameOver) {
+                this.newWave();
+                this.waveCount++;
+                wave.nextWaveTrigger = true;
+            } 
         });
     }
     //create projectiles object pool
@@ -96,6 +101,11 @@ export default class Game {
             context.fillText('Game Over!', this.width * 0.5, this.height * 0.5);
         }
         context.restore();
+    }
+    newWave() {
+        this.columns++;
+        this.rows++;
+        this.waves.push(new Wave(this));
     }
 
 }
