@@ -103,8 +103,11 @@ export default class Game {
         context.restore();
     }
     newWave() {
-        this.columns++;
-        this.rows++;
+        if(Math.random() < 0.5 && this.columns * this.enemySize < this.width * 0.8) {
+            this.columns++;
+        } else {
+            this.rows++;
+        }
         this.waves.push(new Wave(this));
     }
 
