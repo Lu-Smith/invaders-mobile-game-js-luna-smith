@@ -17,6 +17,7 @@ export default class Game {
     waves: Wave[];
     score: number;
     gameOver: boolean;
+    waveCount: number;
 
     constructor(canvas: HTMLCanvasElement) {
         this.canvas = canvas;
@@ -28,11 +29,12 @@ export default class Game {
         this.numbersOfProjectiles = 10;
         this.createProjectiles();
         //enemy
-        this.columns = 5;
-        this.rows = 6;
+        this.columns = 2;
+        this.rows = 2;
         this.enemySize = 30;
         this.waves = [];
         this.waves.push(new Wave(this));
+        this.waveCount = 1;
         //score
         this.score = 0;
         this.gameOver = false;
@@ -83,7 +85,11 @@ export default class Game {
     }
     drawStatusText(context: CanvasRenderingContext2D) {
         context.save();
+        context.shadowOffsetX = 2;
+        context.shadowOffsetY = 2;
+        context.shadowColor ='black';
         context.fillText('Score: ' + this.score, 20, 40);
+        context.fillText('Wave: ' + this.waveCount, 20, 80);
         if (this.gameOver) {
             context.textAlign = 'center';
             context.font = '100px Impact';
