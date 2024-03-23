@@ -10,6 +10,7 @@ export default class Wave {
     speedY: number;
     enemies: Enemy[];
     game: Game;
+    nextWaveTrigger: boolean;
 
     constructor(game: Game) {
         this.game = game;
@@ -20,6 +21,7 @@ export default class Wave {
         this.speedX = 3;
         this.speedY = 0;
         this.enemies = [];
+        this.nextWaveTrigger =false;
         this.create();
     }
     render(context: CanvasRenderingContext2D) {
