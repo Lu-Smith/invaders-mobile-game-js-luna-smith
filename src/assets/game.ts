@@ -18,6 +18,7 @@ export default class Game {
     score: number;
     gameOver: boolean;
     waveCount: number;
+    fired: boolean;
 
     constructor(canvas: HTMLCanvasElement) {
         this.canvas = canvas;
@@ -25,8 +26,9 @@ export default class Game {
         this.height = this.canvas.height;
         this.keys = [];
         this.player = new Player(this);
-        this.projectilesPool = [];
+        this.projectilesPool = [];        
         this.numbersOfProjectiles = 10;
+        this.fired = false;
         this.createProjectiles();
         //enemy
         this.columns = 5;
@@ -41,11 +43,13 @@ export default class Game {
 
         //event listeners
         window.addEventListener('keydown', e => {
+            if (e.key === '1' && !this.fired) this.player.shoot();
+            this.fired = true;
             if (this.keys.indexOf(e.key) === -1) this.keys.push(e.key);
-            if (e.key === '1') this.player.shoot();
         })
 
         window.addEventListener('keyup', e => {
+            this.fired = false;
             const index = this.keys.indexOf(e.key);
             if (index > -1) this.keys.splice(index, 1);
         })
@@ -115,5 +119,4 @@ export default class Game {
         }
         this.waves.push(new Wave(this));
     }
-
 }
