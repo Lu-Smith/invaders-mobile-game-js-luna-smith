@@ -22,6 +22,7 @@ export default class Enemy {
     }
     draw(context: CanvasRenderingContext2D) {
         context.strokeRect(this.x, this.y, this.width, this.height);
+        context.drawImage(this.image, this.x, this.y);
     }
     update(x: number, y: number) {
         this.x = x + this.positionX;
