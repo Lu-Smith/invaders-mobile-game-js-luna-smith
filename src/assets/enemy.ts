@@ -31,9 +31,16 @@ export default class Enemy {
             if (!projectile.free && this.game.checkCollision(this, projectile)) {
                 this.markedForDeletion = true;
                 projectile.reset();
-                this.game.score++;
+                if (!this.game.gameOver) this.game.score++;
             }
         });
+        // check collision enemies - player
+        if (this.game.checkCollision(this, this.game.player)) {
+            this.markedForDeletion = true;
+            if (!this.game.gameOver && this.game.score > 0) this.game.score--;
+            this.game.player.lives--;
+            if (this.game.player.lives < 1) this.game.gameOver = true;
+        }
         // lose condition
         if (this.y + this.height > this.game.height) {
             this.game.gameOver = true;
