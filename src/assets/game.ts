@@ -64,6 +64,7 @@ export default class Game {
                 this.newWave();
                 this.waveCount++;
                 wave.nextWaveTrigger = true;
+                if (this.player.lives < 20) this.player.lives++;
             } 
         });
     }
@@ -95,6 +96,10 @@ export default class Game {
         context.shadowColor ='black';
         context.fillText('Score: ' + this.score, 20, 40);
         context.fillText('Wave: ' + this.waveCount, 20, 80);
+        for (let i = 0; i < this.player.lives; i++) {
+            context.fillStyle = 'green';
+            context.fillRect(12 * i, 100, 10, 15);
+        }
         if (this.gameOver) {
             context.textAlign = 'center';
             context.font = '100px Impact';
