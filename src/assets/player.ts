@@ -8,6 +8,10 @@ export default class Player {
     y: number;
     speed: number;
     lives: number;
+    // matching types with Projectile
+    free: any;
+    start: any;
+    reset: any;
 
     constructor(game: Game) {
         this.game = game;
@@ -17,6 +21,10 @@ export default class Player {
         this.y = this.game.height - this.height;
         this.speed = 5;
         this.lives = 3;
+         // matching types with Projectile
+        this.free;
+        this.start;
+        this.reset;
     }
     draw(context: CanvasRenderingContext2D) {
         context.fillRect(this.x, this.y, this.width, this.height);
