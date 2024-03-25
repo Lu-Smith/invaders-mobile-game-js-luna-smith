@@ -1,4 +1,5 @@
 import Game from './game';
+import Enemy1 from './enemy1';
 
 export default class Enemy {
     width: number;
@@ -8,8 +9,8 @@ export default class Enemy {
     positionX: number;
     positionY: number;
     markedForDeletion: boolean;
-
     game: Game;
+    
     constructor(game: Game, positionX: number, positionY: number) {
         this.game = game;
         this.width = this.game.enemySize;
@@ -22,7 +23,9 @@ export default class Enemy {
     }
     draw(context: CanvasRenderingContext2D) {
         context.strokeRect(this.x, this.y, this.width, this.height);
-        context.drawImage(this.image, this.x, this.y);
+        if (this instanceof Enemy1) {
+        context.drawImage(this.image, this.frameX * this.width , this.frameY * this.height, this.width, this.height, this.x, this.y, this.width, this.height);
+        }
     }
     update(x: number, y: number) {
         this.x = x + this.positionX;
