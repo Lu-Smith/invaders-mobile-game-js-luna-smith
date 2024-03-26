@@ -30,7 +30,7 @@ body {
  background: url('./assets/background.png');
 }
 
-#enemy1 {
+#enemy1, #player, #player_jets {
   display: none;
 }
 
