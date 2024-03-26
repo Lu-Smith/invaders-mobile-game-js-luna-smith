@@ -37,10 +37,10 @@ export default class Player {
     }
     draw(context: CanvasRenderingContext2D) {
         //handle sprite frames
-        if ( this.game.keys.indexOf('1') > -1) {
+        if ((this.game.keys.indexOf('1')  > -1) || (this.game.keys.indexOf(' ') > -1) || (this.game.keys.indexOf('Enter') > -1)) {
             this.frameX = 2;
         } else {
-            this.frameX = 2;
+            this.frameX = 0;
         }
         context.drawImage(this.jets_image, this.jets_frameX * this.width, 0, this.width, this.height, this.x, this.y, this.width, this.height);
         context.drawImage(this.image, this.frameX * this.width, 0, this.width, this.height, this.x, this.y, this.width, this.height);
