@@ -24,7 +24,15 @@ export default class Enemy {
     draw(context: CanvasRenderingContext2D) {
         // context.strokeRect(this.x, this.y, this.width, this.height);
         if (this instanceof Enemy1) {
-        context.drawImage(this.image, this.frameX * this.width , this.frameY * this.height, this.width, this.height, this.x, this.y, this.width, this.height);
+            if (this.game.waveCount % 2 === 0 && this.game.waveCount % 3 !== 0) {
+                context.drawImage(this.image, this.frameX * this.width , this.frameY1 * this.height, this.width, this.height, this.x, this.y, this.width, this.height);
+            } else if (this.game.waveCount % 2 !== 0 && this.game.waveCount % 3 === 0 && this.game.waveCount % 5 !== 0) {
+                context.drawImage(this.image, this.frameX * this.width , this.frameY2 * this.height, this.width, this.height, this.x, this.y, this.width, this.height);
+            } else if (this.game.waveCount % 2 !== 0 && this.game.waveCount % 5 === 0) {
+                context.drawImage(this.image, this.frameX * this.width , this.frameY3 * this.height, this.width, this.height, this.x, this.y, this.width, this.height);
+            } else {
+                context.drawImage(this.image, this.frameX * this.width , this.frameY4 * this.height, this.width, this.height, this.x, this.y, this.width, this.height);
+            }
         }
     }
     update(x: number, y: number) {
