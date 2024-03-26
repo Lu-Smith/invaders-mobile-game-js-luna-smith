@@ -19,6 +19,9 @@ export default class Game {
     gameOver: boolean;
     waveCount: number;
     fired: boolean;
+    spriteUpdate: boolean;
+    spriteTimer: number;
+    spriteInterval: number;
 
     constructor(canvas: HTMLCanvasElement) {
         this.canvas = canvas;
@@ -37,6 +40,9 @@ export default class Game {
         this.waves = [];
         this.waves.push(new Wave(this));
         this.waveCount = 1;
+        this.spriteUpdate = false;
+        this.spriteTimer = 0;
+        this.spriteInterval = 500;
         //score
         this.score = 0;
         this.gameOver = false;
@@ -54,7 +60,15 @@ export default class Game {
             if (index > -1) this.keys.splice(index, 1);
         })
     }
-    render(context: CanvasRenderingContext2D) {
+    render(context: CanvasRenderingContext2D, deltaTime: number) {
+        //sprite logic
+        if (this.spriteTimer > this.spriteInterval) {
+            this.spriteUpdate = true;
+            this.spriteTimer = 0;
+        } else {
+            this.spriteUpdate = false;
+            this.spriteTimer += deltaTime;
+        }
         this.drawStatusText(context);
         this.player.draw(context);
         this.player.update();
