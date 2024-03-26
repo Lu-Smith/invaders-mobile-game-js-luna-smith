@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
 :root {
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -14,6 +16,8 @@
 body {
   width: 100vw;
   height: 100vh;
+  background-color: black;
+  color: aliceblue;
 }
 
 #app {
@@ -32,5 +36,27 @@ body {
 
 #enemy1, #player, #player_jets {
   display: none;
+}
+
+footer {
+  font-family: "Roboto", sans-serif;
+  margin: 10px;
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+footer a {
+  color: antiquewhite;
+  text-decoration: none;
+  transition: all 200ms ease-in-out;
+}
+
+footer a:hover {
+  position: relative;
+  color: rgb(239, 182, 108);
+  top: 5px; 
+  border-top: 3px solid antiquewhite;
+
+  padding-top: 3px;
 }
 
