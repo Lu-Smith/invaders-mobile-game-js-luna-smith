@@ -62,6 +62,9 @@ export default class Player {
     }
     shoot() {
         const projectile = this.game.getProjectile();
-        if (projectile) projectile.start(this.x + this.width * 0.5, this.y);
-    }
+        if (projectile) {
+            projectile.start(this.x + this.width * 0.5, this.y);
+            this.game.sound.play(this.game.sound.shoot1);  
+        }
+    } 
 }
