@@ -31,13 +31,13 @@ export default class Enemy {
         this.x = x + this.positionX;
         this.y = y + this.positionY;
         // check collision enemies - projectiles
-        this.game.projectilesPool.forEach(projectile => {
-            if (!projectile.free && this.game.checkCollision(this, projectile)) {
-                this.hit(1);
-                projectile.reset();
-            }
-        });
         if (this instanceof Enemy1) {
+            this.game.projectilesPool.forEach(projectile => {
+                if (!projectile.free && this.game.checkCollision(this, projectile) && this.lives > 0) {
+                    this.hit(1);
+                    projectile.reset();
+                }
+            });
             if (this.lives < 1) {
                 if (this.game.spriteUpdate) this.frameX++;
                 if (this.frameX > this.maxFrame) {
