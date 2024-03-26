@@ -22,7 +22,7 @@ export default class Enemy {
         this.markedForDeletion = false;
     }
     draw(context: CanvasRenderingContext2D) {
-        context.strokeRect(this.x, this.y, this.width, this.height);
+        // context.strokeRect(this.x, this.y, this.width, this.height);
         if (this instanceof Enemy1) {
         context.drawImage(this.image, this.frameX * this.width , this.frameY * this.height, this.width, this.height, this.x, this.y, this.width, this.height);
         }
@@ -33,11 +33,19 @@ export default class Enemy {
         // check collision enemies - projectiles
         this.game.projectilesPool.forEach(projectile => {
             if (!projectile.free && this.game.checkCollision(this, projectile)) {
-                this.markedForDeletion = true;
+                this.hit(1);
                 projectile.reset();
-                if (!this.game.gameOver) this.game.score++;
             }
         });
+        if (this instanceof Enemy1) {
+            if (this.lives < 1) {
+                this.frameX++;
+                if (this.frameX > this.maxFrame) {
+                    this.markedForDeletion = true;
+                    if (!this.game.gameOver) this.game.score += this.maxLives;
+                }
+            }
+        }
         // check collision enemies - player
         if (this.game.checkCollision(this, this.game.player)) {
             this.markedForDeletion = true;
@@ -50,6 +58,10 @@ export default class Enemy {
             this.game.gameOver = true;
             this.markedForDeletion = true;
         }
-
+    }
+    hit(damage: number) {
+        if (this instanceof Enemy1) {
+            this.lives -= damage;
+        }
     }
 }
