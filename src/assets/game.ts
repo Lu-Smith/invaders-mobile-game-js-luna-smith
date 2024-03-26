@@ -148,8 +148,8 @@ export default class Game {
             context.textAlign = 'center';
             context.font = '80px Impact';
             context.fillText('Game Over!', this.width * 0.5, this.height * 0.5);
-            context.font = '15px Impact';
-            context.fillText('Press R to play again.', this.width * 0.5, this.height * 0.561);
+            context.font = '15px Ariel';
+            context.fillText('Press R to play again.', this.width * 0.5, this.height * 0.54);
         }
         context.restore();
     }
