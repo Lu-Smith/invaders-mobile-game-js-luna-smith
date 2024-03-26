@@ -39,7 +39,7 @@ export default class Enemy {
         });
         if (this instanceof Enemy1) {
             if (this.lives < 1) {
-                this.frameX++;
+                if (this.game.spriteUpdate) this.frameX++;
                 if (this.frameX > this.maxFrame) {
                     this.markedForDeletion = true;
                     if (!this.game.gameOver) this.game.score += this.maxLives;
