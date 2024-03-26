@@ -70,12 +70,13 @@ export default class Game {
             this.spriteTimer += deltaTime;
         }
         this.drawStatusText(context);
-        this.player.draw(context);
-        this.player.update();
         this.projectilesPool.forEach(projectile => {
             projectile.update();
             projectile.draw(context);
         });
+        this.player.draw(context);
+        this.player.update();
+ 
         this.waves.forEach(wave => {
             wave.render(context);
             if (wave.enemies.length < 1 && !wave.nextWaveTrigger && !this.gameOver) {
