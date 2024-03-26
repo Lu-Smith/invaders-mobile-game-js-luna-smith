@@ -8,6 +8,8 @@ export default class Player {
     y: number;
     speed: number;
     lives: number;
+    image: HTMLImageElement;
+    frameX: number;
     // matching types with Projectile
     free: any;
     start: any;
@@ -15,19 +17,27 @@ export default class Player {
 
     constructor(game: Game) {
         this.game = game;
-        this.width = 60;
+        this.width = 70;
         this.height = 60;
         this.x = this.game.width * 0.5 - this.width * 0.5;
         this.y = this.game.height - this.height;
         this.speed = 5;
         this.lives = 3;
-         // matching types with Projectile
+        this.image = document.getElementById('player') as HTMLImageElement;
+        this.frameX = 0;
+        // matching types with Projectile
         this.free;
         this.start;
         this.reset;
     }
     draw(context: CanvasRenderingContext2D) {
-        context.fillRect(this.x, this.y, this.width, this.height);
+        //handle sprite frames
+        if ( this.game.keys.indexOf('1') > -1) {
+            this.frameX = 2;
+        } else {
+            this.frameX = 0;
+        }
+        context.drawImage(this.image, this.frameX * this.width, 0, this.width, this.height, this.x, this.y, this.width, this.height);
     }
     update() {
         //horizontal movement
