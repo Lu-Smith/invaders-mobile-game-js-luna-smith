@@ -64,11 +64,13 @@ export default class Enemy {
         // lose condition
         if (this.y + this.height > this.game.height || this.game.player.lives < 1) {
             this.game.gameOver = true;
+            this.game.sound.play(this.game.sound.lose); 
         }
     }
     hit(damage: number) {
         if (this instanceof Enemy1) {
             this.lives -= damage;
+            this.game.sound.play(this.game.sound.destroyed[Math.floor(Math.random() * 2)]);  
         }
     }
 }
