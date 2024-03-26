@@ -46,17 +46,16 @@ export default class Enemy {
                 }
             }
         }
-        // check collision enemies - player
-        if (this.game.checkCollision(this, this.game.player)) {
-            this.markedForDeletion = true;
-            if (!this.game.gameOver && this.game.score > 0) this.game.score--;
-            this.game.player.lives--;
-            if (this.game.player.lives < 1) this.game.gameOver = true;
+        // check collision enemies-player
+        if (this instanceof Enemy1) {
+            if (this.game.checkCollision(this, this.game.player) && this.lives > 0) {
+                this.lives = 0;
+                this.game.player.lives--;
+            }
         }
         // lose condition
-        if (this.y + this.height > this.game.height) {
+        if (this.y + this.height > this.game.height || this.game.player.lives < 1) {
             this.game.gameOver = true;
-            this.markedForDeletion = true;
         }
     }
     hit(damage: number) {
