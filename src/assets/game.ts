@@ -50,7 +50,7 @@ export default class Game {
 
         //event listeners
         window.addEventListener('keydown', e => {
-            if (e.key === '1' && !this.fired) this.player.shoot();
+            if ((e.key === '1' || e.key === 'Enter' || e.key === ' ') && !this.fired) this.player.shoot();
             this.fired = true;
             if (this.keys.indexOf(e.key) === -1) this.keys.push(e.key);
         })
@@ -111,17 +111,21 @@ export default class Game {
     }
     drawStatusText(context: CanvasRenderingContext2D) {
         context.save();
-        context.shadowOffsetX = 2;
-        context.shadowOffsetY = 2;
+        context.shadowOffsetX = 1.5;
+        context.shadowOffsetY = 1.5;
         context.shadowColor ='black';
         context.fillText('Score: ' + this.score, 20, 40);
-        context.fillText('Wave: ' + this.waveCount, 20, 80);
+        context.fillText('Wave: ' + this.waveCount, 20, 65);
         for (let i = 0; i < this.player.maxLives; i++) {
-            context.fillStyle = '#3baea0';
+            if ( this.player.lives < 2) {
+                context.fillStyle = '#f1b963';
+            } else {
+                context.fillStyle = '#3baea0';
+            }
             context.shadowOffsetX = 0;
             context.shadowOffsetY = 0;
             context.shadowColor = 'none';
-            context.fillRect(12 * i, 100, 20, 16)
+            context.fillRect(12 * i, 0, 20, 16)
         }
         for (let i = 0; i < this.player.lives; i++) {
             if ( this.player.lives < 2) {
@@ -129,14 +133,14 @@ export default class Game {
             } else {
               context.fillStyle = '#118a7e';
             }
-            context.shadowOffsetX = 1;
-            context.shadowOffsetY = 1;
+            context.shadowOffsetX = 0.6;
+            context.shadowOffsetY = 0.6;
             context.shadowColor ='black';
-            context.fillRect(12 * i, 100, 10, 15);
+            context.fillRect(12 * i, 0, 10, 15);
         }
         if (this.gameOver) {
             context.textAlign = 'center';
-            context.font = '100px Impact';
+            context.font = '80px Impact';
             context.fillText('Game Over!', this.width * 0.5, this.height * 0.5);
         }
         context.restore();
