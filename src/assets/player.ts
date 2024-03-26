@@ -9,7 +9,9 @@ export default class Player {
     speed: number;
     lives: number;
     image: HTMLImageElement;
+    jets_image: HTMLImageElement;
     frameX: number;
+    jets_frameX: number;
     // matching types with Projectile
     free: any;
     start: any;
@@ -24,7 +26,9 @@ export default class Player {
         this.speed = 5;
         this.lives = 3;
         this.image = document.getElementById('player') as HTMLImageElement;
+        this.jets_image = document.getElementById('player_jets') as HTMLImageElement;
         this.frameX = 0;
+        this.jets_frameX = 1;
         // matching types with Projectile
         this.free;
         this.start;
@@ -35,15 +39,22 @@ export default class Player {
         if ( this.game.keys.indexOf('1') > -1) {
             this.frameX = 2;
         } else {
-            this.frameX = 0;
+            this.frameX = 2;
         }
+        context.drawImage(this.jets_image, this.jets_frameX * this.width, 0, this.width, this.height, this.x, this.y, this.width, this.height);
         context.drawImage(this.image, this.frameX * this.width, 0, this.width, this.height, this.x, this.y, this.width, this.height);
     }
     update() {
         //horizontal movement
-        if (this.game.keys.indexOf('ArrowLeft') > -1) this.x -= this.speed; 
-        if (this.game.keys.indexOf('ArrowRight') > -1) this.x += this.speed; 
-
+        if (this.game.keys.indexOf('ArrowLeft') > -1) {
+            this.x -= this.speed;
+            this.jets_frameX = 0;
+        } else if (this.game.keys.indexOf('ArrowRight') > -1) {
+            this.x += this.speed;
+            this.jets_frameX = 2;
+        } else {
+            this.jets_frameX = 1;
+        }
         //horizontal boundries
         if (this.x < -this.width * 0.5) this.x = -this.width * 0.5;
         else if (this.x > this.game.width - this.width * 0.5) this.x = this.game.width - this.width * 0.5;
