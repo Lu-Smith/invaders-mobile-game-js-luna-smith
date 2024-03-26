@@ -29,13 +29,14 @@ export default class Game {
         this.height = this.canvas.height;
         this.keys = [];
         this.player = new Player(this);
+        //projectiles
         this.projectilesPool = [];        
-        this.numbersOfProjectiles = 10;
+        this.numbersOfProjectiles = 15;
         this.fired = false;
         this.createProjectiles();
         //enemy
-        this.columns = 5;
-        this.rows = 5;
+        this.columns = 1;
+        this.rows = 1;
         this.enemySize = 50;
         this.waves = [];
         this.waves.push(new Wave(this));
@@ -83,7 +84,7 @@ export default class Game {
                 this.newWave();
                 this.waveCount++;
                 wave.nextWaveTrigger = true;
-                if (this.player.lives < 20) this.player.lives++;
+                if (this.player.lives <= this.player.maxLives) this.player.lives++;
             } 
         });
     }
@@ -115,8 +116,22 @@ export default class Game {
         context.shadowColor ='black';
         context.fillText('Score: ' + this.score, 20, 40);
         context.fillText('Wave: ' + this.waveCount, 20, 80);
+        for (let i = 0; i < this.player.maxLives; i++) {
+            context.fillStyle = '#3baea0';
+            context.shadowOffsetX = 0;
+            context.shadowOffsetY = 0;
+            context.shadowColor = 'none';
+            context.fillRect(12 * i, 100, 20, 16)
+        }
         for (let i = 0; i < this.player.lives; i++) {
-            context.fillStyle = 'green';
+            if ( this.player.lives < 2) {
+                context.fillStyle = '#ff7e67';
+            } else {
+              context.fillStyle = '#118a7e';
+            }
+            context.shadowOffsetX = 1;
+            context.shadowOffsetY = 1;
+            context.shadowColor ='black';
             context.fillRect(12 * i, 100, 10, 15);
         }
         if (this.gameOver) {
