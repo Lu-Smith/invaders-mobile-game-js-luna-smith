@@ -8,6 +8,7 @@ export default class Player {
     y: number;
     speed: number;
     lives: number;
+    maxLives = 10;
     image: HTMLImageElement;
     jets_image: HTMLImageElement;
     frameX: number;
