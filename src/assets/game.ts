@@ -2,6 +2,7 @@ import Enemy from "./enemy";
 import Player from "./player";
 import Projectile from "./projectile";
 import Wave from "./wave";
+import Audio from './audio';
 
 export default class Game {
     canvas: HTMLCanvasElement;
@@ -22,6 +23,8 @@ export default class Game {
     spriteUpdate: boolean;
     spriteTimer: number;
     spriteInterval: number;
+    //audio
+    sound: Audio;
 
     constructor(canvas: HTMLCanvasElement) {
         this.canvas = canvas;
@@ -47,6 +50,8 @@ export default class Game {
         //score
         this.score = 0;
         this.gameOver = false;
+        //audio
+        this.sound = new Audio();
 
         //event listeners
         window.addEventListener('keydown', e => {
@@ -113,7 +118,7 @@ export default class Game {
     drawStatusText(context: CanvasRenderingContext2D) {
         context.save();
         context.shadowOffsetX = 1.5;
-        context.shadowOffsetY = 1.5;
+        context.shadowOffsetY = 1.5; 
         context.shadowColor ='black';
         context.fillText('Score: ' + this.score, 20, 40);
         context.fillText('Wave: ' + this.waveCount, 20, 65);
@@ -143,18 +148,19 @@ export default class Game {
             context.textAlign = 'center';
             context.font = '80px Impact';
             context.fillText('Game Over!', this.width * 0.5, this.height * 0.5);
-            context.font = '20px Impact';
-            context.fillText('Press R to play again.', this.width * 0.5, this.height * 0.6);
+            context.font = '15px Impact';
+            context.fillText('Press R to play again.', this.width * 0.5, this.height * 0.561);
         }
         context.restore();
     }
     newWave() {
-        if(Math.random() < 0.5 && this.columns * this.enemySize < this.width * 0.8) {
+        if(Math.random() < 0.6 && this.columns * this.enemySize < this.width * 0.9) {
             this.columns++;
         } else if (this.rows * this.enemySize < this.height * 0.6) {
             this.rows++;
         }
         this.waves.push(new Wave(this));
+
     }
     reset() {
         this.columns = 2;
@@ -167,5 +173,6 @@ export default class Game {
         this.player.lives = 3;
         this.waves = [];
         this.newWave();
+        this.sound.play(this.sound.win); 
     }
 }
