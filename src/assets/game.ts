@@ -42,7 +42,7 @@ export default class Game {
         this.waveCount = 1;
         this.spriteUpdate = false;
         this.spriteTimer = 0;
-        this.spriteInterval = 500;
+        this.spriteInterval = 200;
         //score
         this.score = 0;
         this.gameOver = false;
