@@ -9,9 +9,9 @@ window.addEventListener('load', function() {
     canvas.height = 800 * 0.8;
     if (ctx) {
       ctx.fillStyle = 'white';
-      ctx.strokeStyle = 'white';
+      ctx.strokeStyle = '#feffdf';
       ctx.lineWidth = 3;
-      ctx.font = '20px Impact';
+      ctx.font = '15px Impact';
     }
 
     const game = new Game(canvas);
