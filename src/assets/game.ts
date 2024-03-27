@@ -110,7 +110,8 @@ export default class Game {
         context.drawImage(this.image, 0, 0);
     }
     render(context: CanvasRenderingContext2D, deltaTime: number) {
-        if (this.score === 0) this.resize();
+        if (this.score === 0 ) this.resize();
+        this.resizeScreen = false;
         context.fillStyle = 'white';
         context.strokeStyle = '#feffdf';
         context.lineWidth = 3;

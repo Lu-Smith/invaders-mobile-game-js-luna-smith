@@ -1,3 +1,9 @@
+import Lose from './media/lost.mp3';
+import Win from './media/win.mp3';
+import Destroyed1 from './media/destroyed1.mp3';
+import Destroyed2 from './media/destroyed2.mp3';
+import Shoot1 from './media/shoot1.mp3';
+
 export default class Audio {
     destroyed1: HTMLAudioElement; 
     destroyed2: HTMLAudioElement;
@@ -5,14 +11,21 @@ export default class Audio {
     win: HTMLAudioElement;
     lose: HTMLAudioElement;
     shoot1: HTMLAudioElement;
+    createAudioElement: (src: string) => HTMLAudioElement;
 
     constructor() {
-        this.shoot1 = document.getElementById('shoot1') as HTMLAudioElement;
-        this.destroyed1 = document.getElementById('destroyed1') as HTMLAudioElement;
-        this.destroyed2 = document.getElementById('destroyed2') as HTMLAudioElement;
+        this.createAudioElement = (src: string) => {
+            const audio = document.createElement('audio');
+            audio.src = src;
+            return audio;
+        };
+        
+        this.destroyed1 = this.createAudioElement(Destroyed1);
+        this.destroyed2 = this.createAudioElement(Destroyed2);
         this.destroyed = [this.destroyed1, this.destroyed2];
-        this.win = document.getElementById('win') as HTMLAudioElement ;
-        this.lose = document.getElementById('lose') as HTMLAudioElement ;
+        this.win = this.createAudioElement(Win);
+        this.lose = this.createAudioElement(Lose);
+        this.shoot1 = this.createAudioElement(Shoot1);
     }
     play(sound: HTMLAudioElement ) {
         sound.currentTime = 0;
