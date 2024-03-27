@@ -101,7 +101,7 @@ export default class Game {
                 if (e.changedTouches[0].pageX - this.touchStartX > this.swipeDistance) {
                     this.left = true;
                     this.right = false;
-                } else if (e.changedTouches[0].pageX - this.touchStartX > this.swipeDistance) {
+                } else if (e.changedTouches[0].pageX - this.touchStartX < -this.swipeDistance) {
                     this.right = true;
                     this.left = false;
                 } else {
