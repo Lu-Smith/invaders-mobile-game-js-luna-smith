@@ -97,18 +97,27 @@ export default class Game {
         })
 
         this.canvas.addEventListener('touchend', e => {
-            if (e.changedTouches[0].pageX - this.touchStartX > this.swipeDistance) {
-                this.left = true;
-                this.right = false;
-            } else if (e.changedTouches[0].pageX - this.touchStartX > this.swipeDistance) {
-                this.right = true;
-                this.left = false;
+            if (!this.gameOver) {
+                if (e.changedTouches[0].pageX - this.touchStartX > this.swipeDistance) {
+                    this.left = true;
+                    this.right = false;
+                } else if (e.changedTouches[0].pageX - this.touchStartX > this.swipeDistance) {
+                    this.right = true;
+                    this.left = false;
+                } else {
+                    this.player.shoot();
+                    this.right = false;
+                    this.left = false;
+                }
             } else {
-                this.player.shoot();
-                this.right = false;
-                this.left = false;
+                this.reset();
             }
         });
+
+        //mouse controls      
+        this.canvas.addEventListener('mousedown', () => {
+            if (this.gameOver) this.reset();
+        });   
     }
     resize() {
         this.resizeScreen = true;
@@ -255,7 +264,7 @@ export default class Game {
             } else {
                 context.font = '10px Ariel';
             } 
-            context.fillText('Press R to play again.', this.width * 0.5, this.height * 0.54);
+            context.fillText('Press "R" ot tap to play again.', this.width * 0.5, this.height * 0.54);
         }
         context.restore();
     }
