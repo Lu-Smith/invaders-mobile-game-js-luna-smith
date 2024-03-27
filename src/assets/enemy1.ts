@@ -14,7 +14,7 @@ export default class Enemy1 extends Enemy {
 
     constructor(game: Game, positionX: number, positionY: number) {
         super(game, positionX, positionY);
-        this.image = document.getElementById('enemy1') as HTMLImageElement;
+        this.image = document.getElementById('enemy1') as HTMLImageElement; 
         this.frameX = 0;
         this.maxFrame = 2;
         this.frameY1 = 0;
@@ -23,5 +23,12 @@ export default class Enemy1 extends Enemy {
         this.frameY4 = 3;
         this.lives = 1;
         this.maxLives = this.lives;
+    }
+    resize() {
+        if (this.game.imageSrc === 'background') {
+            this.image = document.getElementById('enemy1') as HTMLImageElement;
+        } else {
+            this.image = document.getElementById('enemy1Small') as HTMLImageElement;;
+        }
     }
 }
