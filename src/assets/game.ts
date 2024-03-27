@@ -86,15 +86,25 @@ export default class Game {
         if (window.innerWidth < canvasWidth * 1.1 || window.innerHeight < canvasHeight * 1.1) {
             this.canvas.width = canvasWidthSmall
             this.canvas.height = canvasHeightSmall;
+            this.width = this.canvas.width;
+            this.height = this.canvas.height;
+            this.enemySize = 30;
             this.imageSrc = 'backgroundSmall';
             this.image = document.getElementById(this.imageSrc) as HTMLImageElement;
         } else {
             // Use original canvas width and height
             this.canvas.width = canvasWidth;
             this.canvas.height = canvasHeight;
+            this.width = this.canvas.width;
+            this.height = this.canvas.height;
+            this.enemySize = 50;
             this.imageSrc = 'background';
             this.image = document.getElementById(this.imageSrc) as HTMLImageElement;
         }
+        this.waves.forEach(wave => {
+            wave.resize();
+        })
+        this.player.resize();
     }
     draw(context: CanvasRenderingContext2D) {
         context.drawImage(this.image, 0, 0);
@@ -106,8 +116,10 @@ export default class Game {
         context.lineWidth = 3;
         if (this.imageSrc === 'background') {
             context.font = '15px Impact';
+            this.enemySize = 50;
         } else {
             context.font = '10px Impact';
+            this.enemySize = 30;
         }       
         //sprite logic
         if (this.spriteTimer > this.spriteInterval) {
@@ -162,8 +174,14 @@ export default class Game {
         context.shadowOffsetX = 1.5;
         context.shadowOffsetY = 1.5; 
         context.shadowColor ='black';
-        context.fillText('Score: ' + this.score, 20, 40);
-        context.fillText('Wave: ' + this.waveCount, 20, 65);
+        if (this.imageSrc === 'background') {
+            context.fillText('Score: ' + this.score, 20, 40);
+            context.fillText('Wave: ' + this.waveCount, 20, 65);
+        } else {
+            context.fillText('Score: ' + this.score, 10, 35);
+            context.fillText('Wave: ' + this.waveCount, 10, 50);
+        } 
+      
         for (let i = 0; i < this.player.maxLives; i++) {
             if ( this.player.lives < 2) {
                 context.fillStyle = '#f1b963';
@@ -188,9 +206,17 @@ export default class Game {
         }
         if (this.gameOver) {
             context.textAlign = 'center';
-            context.font = '80px Impact';
+            if (this.imageSrc === 'background') {
+                context.font = '75px Impact';
+            } else {
+                context.font = '50px Impact';
+            } 
             context.fillText('Game Over!', this.width * 0.5, this.height * 0.5);
-            context.font = '15px Ariel';
+            if (this.imageSrc === 'background') {
+                context.font = '15px Ariel';
+            } else {
+                context.font = '10px Ariel';
+            } 
             context.fillText('Press R to play again.', this.width * 0.5, this.height * 0.54);
         }
         context.restore();
