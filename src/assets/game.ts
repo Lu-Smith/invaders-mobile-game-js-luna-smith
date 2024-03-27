@@ -8,6 +8,7 @@ export default class Game {
     canvas: HTMLCanvasElement;
     width: number;
     height: number;
+    image: HTMLImageElement;
     player: Player;
     keys: string[];
     projectilesPool: Projectile [];
@@ -25,6 +26,9 @@ export default class Game {
     spriteInterval: number;
     //audio
     sound: Audio;
+    //resize
+    resizeScreen: boolean;
+    imageSrc: string;
 
     constructor(canvas: HTMLCanvasElement) {
         this.canvas = canvas;
@@ -32,6 +36,8 @@ export default class Game {
         this.height = this.canvas.height;
         this.keys = [];
         this.player = new Player(this);
+        this.imageSrc = 'background';
+        this.image = document.getElementById(this.imageSrc) as HTMLImageElement;
         //projectiles
         this.projectilesPool = [];        
         this.numbersOfProjectiles = 15;
@@ -52,6 +58,9 @@ export default class Game {
         this.gameOver = false;
         //audio
         this.sound = new Audio();
+        //resize
+        this.resizeScreen = false;
+        window.addEventListener('resize', () => this.resize());
 
         //event listeners
         window.addEventListener('keydown', e => {
@@ -67,7 +76,39 @@ export default class Game {
             if (index > -1) this.keys.splice(index, 1);
         })
     }
+    resize() {
+        this.resizeScreen = true;
+        const canvasWidth = 500;
+        const canvasHeight = 660;
+        const canvasWidthSmall = 300;
+        const canvasHeightSmall = 396;
+        
+        if (window.innerWidth < canvasWidth * 1.1 || window.innerHeight < canvasHeight * 1.1) {
+            this.canvas.width = canvasWidthSmall
+            this.canvas.height = canvasHeightSmall;
+            this.imageSrc = 'backgroundSmall';
+            this.image = document.getElementById(this.imageSrc) as HTMLImageElement;
+        } else {
+            // Use original canvas width and height
+            this.canvas.width = canvasWidth;
+            this.canvas.height = canvasHeight;
+            this.imageSrc = 'background';
+            this.image = document.getElementById(this.imageSrc) as HTMLImageElement;
+        }
+    }
+    draw(context: CanvasRenderingContext2D) {
+        context.drawImage(this.image, 0, 0);
+    }
     render(context: CanvasRenderingContext2D, deltaTime: number) {
+        if (this.score === 0) this.resize();
+        context.fillStyle = 'white';
+        context.strokeStyle = '#feffdf';
+        context.lineWidth = 3;
+        if (this.imageSrc === 'background') {
+            context.font = '15px Impact';
+        } else {
+            context.font = '10px Impact';
+        }       
         //sprite logic
         if (this.spriteTimer > this.spriteInterval) {
             this.spriteUpdate = true;
@@ -76,6 +117,7 @@ export default class Game {
             this.spriteUpdate = false;
             this.spriteTimer += deltaTime;
         }
+        this.draw(context);
         this.drawStatusText(context);
         this.projectilesPool.forEach(projectile => {
             projectile.update();
