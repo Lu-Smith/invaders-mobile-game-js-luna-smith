@@ -18,6 +18,7 @@ body {
   height: 100vh;
   background-color: rgb(19, 18, 20);
   color: aliceblue;
+  overflow: hidden;
 }
 
 #app {
@@ -35,7 +36,7 @@ body {
  border-radius: 5px;
 }
 
-#enemy1, #player, #player_jets, #background, #backgroundSmall {
+#enemy1, #player, #player_jets, #background, #backgroundSmall, #enemy1Small, #playerSmall, #player_jets_small {
   display: none;
 }
 
