@@ -29,6 +29,12 @@ export default class Game {
     //resize
     resizeScreen: boolean;
     imageSrc: string;
+    //mobile
+    touchStartX: number;
+    swipeDistance: number;
+    left: boolean;
+    right: boolean;
+
 
     constructor(canvas: HTMLCanvasElement) {
         this.canvas = canvas;
@@ -61,6 +67,11 @@ export default class Game {
         //resize
         this.resizeScreen = false;
         window.addEventListener('resize', () => this.resize());
+        //mobile
+        this.touchStartX = 0;
+        this.swipeDistance = 50;
+        this.left = false;
+        this.right = false;
 
         //event listeners
         window.addEventListener('keydown', e => {
@@ -75,6 +86,29 @@ export default class Game {
             const index = this.keys.indexOf(e.key);
             if (index > -1) this.keys.splice(index, 1);
         })
+        //touch controls
+        this.canvas.addEventListener('touchstart', e => {
+            this.player.shoot();
+            this.touchStartX = e.changedTouches[0].pageX;
+        });
+
+        this.canvas.addEventListener('touchmove', e => {
+           e.preventDefault();
+        })
+
+        this.canvas.addEventListener('touchend', e => {
+            if (e.changedTouches[0].pageX - this.touchStartX > this.swipeDistance) {
+                this.left = true;
+                this.right = false;
+            } else if (e.changedTouches[0].pageX - this.touchStartX > this.swipeDistance) {
+                this.right = true;
+                this.left = false;
+            } else {
+                this.player.shoot();
+                this.right = false;
+                this.left = false;
+            }
+        });
     }
     resize() {
         this.resizeScreen = true;

@@ -48,10 +48,10 @@ export default class Player {
     }
     update() {
         //horizontal movement
-        if (this.game.keys.indexOf('ArrowLeft') > -1) {
+        if ((this.game.keys.indexOf('ArrowLeft') > -1 ) || this.game.left)   {
             this.x -= this.speed;
             this.jets_frameX = 0;
-        } else if (this.game.keys.indexOf('ArrowRight') > -1) {
+        } else if ((this.game.keys.indexOf('ArrowRight') > -1) || this.game.right) {
             this.x += this.speed;
             this.jets_frameX = 2;
         } else {
