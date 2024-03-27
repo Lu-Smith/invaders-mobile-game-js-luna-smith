@@ -36,15 +36,25 @@ body {
  border-radius: 5px;
 }
 
+#canvas2 {
+  background-color: rgb(19, 18, 20);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+
 #enemy1, #player, #player_jets, #background, #backgroundSmall, #enemy1Small, #playerSmall, #player_jets_small {
   display: none;
 }
 
 footer {
   font-family: "Roboto", sans-serif;
-  margin: 10px;
+  padding: 10px;
   font-size: 0.8rem;
   text-align: center;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 footer a {
@@ -63,8 +73,9 @@ footer a:hover {
 
 @media screen and (max-width: 780px), (max-height: 660px) {
   footer {
-    margin: 10px;
+    padding: 20px;
     font-size: 0.6rem;
+    background-color: rgba(0, 0, 0, 0.9);
   }
 }
 
