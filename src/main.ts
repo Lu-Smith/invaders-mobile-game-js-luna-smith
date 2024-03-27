@@ -5,8 +5,8 @@ window.addEventListener('load', function() {
   const canvas = document.getElementById('canvas1') as HTMLCanvasElement;
   if (canvas) {
     const ctx = canvas.getContext('2d');
-    canvas.width = 600 * 0.8;
-    canvas.height = 800 * 0.8;
+    canvas.width = 500;
+    canvas.height = 660;
     if (ctx) {
       ctx.fillStyle = 'white';
       ctx.strokeStyle = '#feffdf';
