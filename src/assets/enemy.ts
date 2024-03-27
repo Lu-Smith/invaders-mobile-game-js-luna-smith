@@ -40,6 +40,7 @@ export default class Enemy {
         this.y = y + this.positionY;
         // check collision enemies - projectiles
         if (this instanceof Enemy1) {
+            this.resize();
             this.game.projectilesPool.forEach(projectile => {
                 if (!projectile.free && this.game.checkCollision(this, projectile) && this.lives > 0) {
                     this.hit(1);
