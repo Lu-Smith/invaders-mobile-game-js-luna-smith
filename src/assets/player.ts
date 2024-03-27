@@ -36,6 +36,7 @@ export default class Player {
         this.reset;
     }
     draw(context: CanvasRenderingContext2D) {
+        // context.strokeRect(this.x, this.y, this.width, this.height);
         //handle sprite frames
         if ((this.game.keys.indexOf('1')  > -1) || (this.game.keys.indexOf(' ') > -1) || (this.game.keys.indexOf('Enter') > -1)) {
             this.frameX = 2;
@@ -67,4 +68,19 @@ export default class Player {
             this.game.sound.play(this.game.sound.shoot1);  
         }
     } 
+    resize() { 
+        this.x = this.game.width * 0.5 - this.width * 0.5;
+        this.y = this.game.height - this.height;
+        if ( this.game.imageSrc === 'background') {
+            this.width = 70;
+            this.height = 60;
+            this.image = document.getElementById('player') as HTMLImageElement;
+            this.jets_image = document.getElementById('player_jets') as HTMLImageElement;
+        } else {
+            this.width = 40;
+            this.height = 44;
+            this.image = document.getElementById('playerSmall') as HTMLImageElement;
+            this.jets_image = document.getElementById('player_jets_small') as HTMLImageElement;
+        }
+    }
 }
