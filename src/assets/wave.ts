@@ -1,4 +1,3 @@
-
 import Enemy1 from './enemy1';
 import Enemy from './enemy';
 import Game from './game';
@@ -49,5 +48,13 @@ export default class Wave {
                 this.enemies.push(new Enemy1(this.game, enemyX, enemyY));
             }
         }
+    }
+    resize() {
+        this.width = this.game.columns * this.game.enemySize;
+        this.height = this.game.rows * this.game.enemySize;
+        this.enemies.forEach(enemy => {
+            enemy.width = this.game.enemySize;
+            enemy.height = this.game.enemySize;
+        })
     }
 }
