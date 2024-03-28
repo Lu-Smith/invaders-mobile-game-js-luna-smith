@@ -32,8 +32,8 @@ export default class Game {
     //mobile
     touchStartX: number;
     swipeDistance: number;
-    left: boolean;
-    right: boolean;
+    left: number;
+    right: number;
 
 
     constructor(canvas: HTMLCanvasElement) {
@@ -70,8 +70,8 @@ export default class Game {
         //mobile
         this.touchStartX = 0;
         this.swipeDistance = 50;
-        this.left = false;
-        this.right = false;
+        this.left = 0;
+        this.right = 0;
 
         //event listeners
         window.addEventListener('keydown', e => {
@@ -99,15 +99,15 @@ export default class Game {
         this.canvas.addEventListener('touchend', e => {
             if (!this.gameOver) {
                 if (e.changedTouches[0].pageX - this.touchStartX > this.swipeDistance) {
-                    this.left = true;
-                    this.right = false;
+                    this.left = 1;
+                    this.right = 0;
                 } else if (e.changedTouches[0].pageX - this.touchStartX < -this.swipeDistance) {
-                    this.right = true;
-                    this.left = false;
+                    this.right = 1;
+                    this.left = 0;
                 } else {
                     this.player.shoot();
-                    this.right = false;
-                    this.left = false;
+                    this.right = 0;
+                    this.left = 0;
                 }
             } else {
                 this.reset();

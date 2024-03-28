@@ -48,11 +48,20 @@ export default class Player {
     }
     update() {
         //horizontal movement
-        if ((this.game.keys.indexOf('ArrowLeft') > -1 ) || this.game.left)   {
+        if ((this.game.keys.indexOf('ArrowLeft') > -1 ))   {
             this.x -= this.speed;
             this.jets_frameX = 0;
-        } else if ((this.game.keys.indexOf('ArrowRight') > -1) || this.game.right) {
+        } else if ((this.game.keys.indexOf('ArrowRight') > -1)) {
             this.x += this.speed;
+            this.jets_frameX = 2;
+        } else {
+            this.jets_frameX = 1;
+        }
+        if (this.game.left === 1)   {
+            this.x -= this.game.left;
+            this.jets_frameX = 0;
+        } else if (this.game.right === 1) {
+            this.x += this.game.right;
             this.jets_frameX = 2;
         } else {
             this.jets_frameX = 1;
