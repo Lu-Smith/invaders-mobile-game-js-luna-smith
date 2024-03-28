@@ -98,10 +98,10 @@ export default class Game {
 
         this.canvas.addEventListener('touchend', e => {
             if (!this.gameOver) {
-                if (e.changedTouches[0].pageX - this.touchStartX < this.swipeDistance) {
+                if (e.changedTouches[0].pageX - this.touchStartX < (this.swipeDistance * 2)) {
                     this.left = 1;
                     this.right = 0;
-                } else if (e.changedTouches[0].pageX - this.touchStartX > -this.swipeDistance) {
+                } else if (e.changedTouches[0].pageX - this.touchStartX > -(this.swipeDistance * 2)) {
                     this.right = 1;
                     this.left = 0;
                 } else {
